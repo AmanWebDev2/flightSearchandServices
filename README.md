@@ -19,4 +19,16 @@
   }
 }
 ```
-- once we have added the `src/config/config.json` ,to src folder via terminal and run `npx sequilize db:create`
+- once we have added the `src/config/config.json` ,to src folder via terminal and run `npx sequilize db:create` 
+after succesfully executing it run
+`npx sequelize db:migrate`
+
+#db design 
+  - Airplane Table
+  - Flights
+  - Airport
+  - City
+
+  - One flights belongs to one airplane but one airplane may be used in different flight 
+  - A city has many airports but one airport belongs to only one city 
+  - One airport belong to many flights,but on flights belongs to only one airport
