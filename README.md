@@ -11,8 +11,8 @@
 ```json
 {
   "development": {
-    "username": <db user >,
-    <password>: "db password",
+    "username": "<db user name>",
+    "<password>": "db password",
     "database": "Flight_Booking_db",
     "host": "127.0.0.1",
     "dialect": "mysql"
