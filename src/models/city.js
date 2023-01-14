@@ -1,4 +1,5 @@
 'use strict';
+//Here what ever we put restriction on how the db data should be 
 const {
   Model
 } = require('sequelize');
@@ -14,7 +15,11 @@ module.exports = (sequelize, DataTypes) => {
     }
   }
   City.init({
-    name: DataTypes.STRING
+   name: {
+      type: Sequelize.STRING,
+      allowNull:false,
+      unique:true
+    }
   }, {
     sequelize,
     modelName: 'City',

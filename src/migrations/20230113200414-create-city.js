@@ -1,4 +1,5 @@
 'use strict';
+//Here we controll the db structure and incremental change on db level ,(i.e if any thing specified here is null ,you can not put null there even doing that from terminal
 /** @type {import('sequelize-cli').Migration} */
 module.exports = {
   async up(queryInterface, Sequelize) {
@@ -11,7 +12,8 @@ module.exports = {
       },
       name: {
         type: Sequelize.STRING,
-        allowNull:false
+        allowNull:false,
+        unique:true
       },
       createdAt: {
         allowNull: false,
