@@ -8,6 +8,7 @@ class CityService{
     async createCity({cityName}) {
         try{
            await cityRepository.create({name:cityName});
+           return true;
         }
         catch(error){
             console.log("Something went wrong at service layer ");
@@ -20,7 +21,7 @@ class CityService{
                     id:cityId
                 }
             });
-            console.log(requiredCity);
+            return requiredCity;
           } 
         catch (error) {
             console.log("Something went wrong at service layer");
@@ -33,7 +34,7 @@ class CityService{
                 where:{
                     id:cityId
                 },
-                returning:true
+                return:true
             })
         } catch (error) {
             console.log("Something went wrong at service layer");
@@ -45,7 +46,8 @@ class CityService{
              await cityRepository.destroy({
             where:{
                 id:cityId
-            }
+            },
+            return :true
         })
         } catch (error) {
             console.log("Something went wrong at service layer");
