@@ -15,7 +15,7 @@ const cityService =new CityService();
 
 const create= async function createCity(req,res){
     try {
-        const city=cityService.createCity({name:req.body.name});
+        const city=await cityService.createCity({name:req.body.name});
         console.log(req.body.name,"in controller");
         console.log(city);
         return res.status(201).json({

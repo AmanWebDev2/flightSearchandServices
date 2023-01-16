@@ -1,5 +1,5 @@
 //repositry are for intracting with models
-const {City} =require('../models/city');
+const {City} =require('../models/index');
 class CityRepository{
     //CRUD operation on city
      async create({name}) {
