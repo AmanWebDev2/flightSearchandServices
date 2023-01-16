@@ -1,17 +1,19 @@
 //repositry are for intracting with models
-const {City} =require('../models/index');
-class cityRepository{
+const {City} =require('../models/city');
+class CityRepository{
     //CRUD operation on city
-     async createCity({cityName}) {
+     async create({name}) {
         try{
             //We have used await becase we making changes in server which out side the code and will take some time ,that is why we used asny promise based syntax
-           await City.create({name:cityName});//same as named argument in flutter
+           const city=await City.create({name:name});
+           //same as named argument in flutter
+           return city;
         }
         catch(error){
-            console.log("Something went wrong");
+            console.log("Something went wrong",error);
         }
     }
-    async getCityById(cityId){
+    async get(cityId){
         try {
             //model.find one find the instances where your passed queries are meet 
            const requiredCity= await City.findOne({
@@ -26,7 +28,7 @@ class cityRepository{
         }
     }
     
-    async updateCity(cityId,updatedData){
+    async update(cityId,updatedData){
         //model.update takes two parameter first is updatedData,second is query to tell where to update the data
         try {
             await City.update(updatedData,{
@@ -40,7 +42,7 @@ class cityRepository{
         }
        
     }
-    async deleteCity(cityId){
+    async delete(cityId){
         try {
              await City.destroy({
             where:{
@@ -54,4 +56,6 @@ class cityRepository{
         
     }
 }
-module.exports=cityRepository;
+module.exports={
+    CityRepository
+};

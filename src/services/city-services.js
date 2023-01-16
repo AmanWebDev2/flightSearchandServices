@@ -1,27 +1,22 @@
 //To write all the city service logic 
 //Currently we are only giving crud service over city
-const { CityRepository, cityRepository }=require('../repository/index');
+const { CityRepository}=require('../repository/city-repository');
 class CityService{
     constructor(){
-        this.CityRepository=new CityRepository();
+        this.cityRepository=new CityRepository();
     }
-    async createCity({cityName}) {
+    async createCity({name}) {
         try{
-           await cityRepository.create({name:cityName});
-           return true;
+            console.log({name},"in cityRepository");
+          return  this.cityRepository.create({name:name});
         }
         catch(error){
-            console.log("Something went wrong at service layer ");
+            console.log("Something went wrong at service layer ",error);
         }
     }
     async getCityById(cityId){
         try { 
-           const requiredCity= await cityRepository.findOne({
-                where:{
-                    id:cityId
-                }
-            });
-            return requiredCity;
+            return this.cityRepository.get(id);
           } 
         catch (error) {
             console.log("Something went wrong at service layer");
@@ -30,30 +25,24 @@ class CityService{
     
     async updateCity(cityId,updatedData){
         try {
-            await cityRepository.update(updatedData,{
-                where:{
-                    id:cityId
-                },
-                return:true
-            })
+           return this.cityRespository.update(id,updatedData);
         } catch (error) {
             console.log("Something went wrong at service layer");
         }
        
     }
-    async deleteCity(cityId){
+    async deleteCity(id){
         try {
-             await cityRepository.destroy({
-            where:{
-                id:cityId
-            },
-            return :true
-        })
-        } catch (error) {
+             return this.cityRepository.delete(id);
+        }
+        catch (error) {
             console.log("Something went wrong at service layer");
         }
        
         
     }
     
+}
+module.exports={
+    CityService
 }

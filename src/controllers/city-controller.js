@@ -10,13 +10,14 @@ const {CityService}=require('../services/city-services');
 //you can you class well as function as your wish
 
 
-const cityService =new CityService;
-
+const cityService =new CityService();
 //create a city ,PUT ->/city
 
-const create=async function createCity(req,res){
+const create= async function createCity(req,res){
     try {
-        const response=cityService.createCity(req.body);
+        const city=cityService.createCity({name:req.body.name});
+        console.log(req.body.name,"in controller");
+        console.log(city);
         return res.status(201).json({
             data:city,
             success:true,
@@ -30,15 +31,16 @@ const create=async function createCity(req,res){
             data:{},
             success:false,
             message:"Unable to created a city",
+            err:error,
         })
     }
 }
 
 //Get ->/city/:id
 
-const get= async function createCity(req,res){
+const get= async function getCity(req,res){
     try {
-        const response =cityService.getCityById(req.params.id);
+        const response =await cityService.getCityById(req.params.id);
         return res.status(201).json({
             data:response,
             success:true,
@@ -59,9 +61,9 @@ const get= async function createCity(req,res){
 //PATCh ->city/id:
 
 
-const update=async function createCity(req,res){
+const update=async function updateCity(req,res){
     try {
-        const response =cityService.updateCity(req.param.id,res.body);
+        const response =await cityService.updateCity(req.param.id,res.body);
         return res.status(201).json({
             data:response,
             success:true,
@@ -83,9 +85,9 @@ const update=async function createCity(req,res){
 //DELETE-> city/:id
 
 
-const destroy = async function createCity(req,res){
+const destroy = async function deleteCity(req,res){
     try {
-        cityService.deleteCity(req.param.id);
+        await cityService.deleteCity(req.params.id);
         return res.status(200).json({
             success:true,
             message:"Succesfully deleted the data",
@@ -99,3 +101,10 @@ const destroy = async function createCity(req,res){
         })
     }
 }
+module.exports = {
+    create,
+    get,
+    update,
+    destroy
+  }
+  
